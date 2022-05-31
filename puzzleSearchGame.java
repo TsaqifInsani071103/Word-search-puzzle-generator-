@@ -260,18 +260,15 @@ public class puzzleSearchGame {
   } 
 
   private boolean checkIfOnlyFakeLetters(int firstRowIndex, int columnIndex, individualLetter[] word){
-    for(int i = 0; i<word.length; i ++){
-      try{
-        if(this.puzzleGrid[firstRowIndex][columnIndex].getRealValue() == null){
-          System.out.println("ITS A FAKE LETTER!"); 
-          firstRowIndex++; 
-          continue; 
-        }
-      }catch(Exception e){
-        if(!word[i].equals(this.puzzleGrid[firstRowIndex][columnIndex].getRealValue())){
-          return false; 
-        }
+    for(int i = 0; i<word.length; i++, firstRowIndex++){
+      individualMultipleTypes gridBlock = this.puzzleGrid[firstRowIndex][columnIndex]; 
+      if(gridBlock.getRealValue() == null){//check if letter is fake latter 
         continue; 
+      }else if(gridBlock.getRealValue().toString().equals(word[i].toString())){
+        System.out.println("EQUAL"); 
+        continue; 
+      }else{
+        return false; 
       }
     }
     return true; 
