@@ -75,6 +75,7 @@ public class puzzleSearchGame {
     //if longest word is more than 10 and less than 30, grid size depends on number of words and if they fit 
     collectWords(); 
     System.out.println(this.wordBank.toString()); 
+    System.out.println(this.minGridSize); 
     
     
   } 
@@ -91,6 +92,7 @@ public class puzzleSearchGame {
   private void processWordInput(String userInput){
     if(checkIfString(userInput)){
       this.wordBank.add(userInput); 
+      setMinimumGridLength(userInput);
     }else{
       System.out.println("invalid input, please try again"); 
     }
@@ -112,5 +114,11 @@ public class puzzleSearchGame {
       return true; 
     }
   } 
+
+  private void setMinimumGridLength(String userInput){
+    if (userInput.length() > this.minGridSize && userInput.length() < this.MAX_GRID_SIZE){
+      this.minGridSize = userInput.length(); 
+    } 
+  }
 
 }
