@@ -232,14 +232,15 @@ public class puzzleSearchGame {
   }
 
   private boolean verticalGridCheck(int columnIndex, individualLetter[] word){
+    int[] rowIndexes = indexesAsArray();
     int firstRowIndex = 0; 
     int lengthOfWord = word.length; 
     boolean integratedWithGrid = false; 
     while(!integratedWithGrid){
-      if(checkIfWithinBounds(firstRowIndex, lengthOfWord)){
-        if(checkIfOnlyFakeLetters(firstRowIndex, columnIndex, word)){   
+      if(checkIfWithinBounds(rowIndexes[firstRowIndex], lengthOfWord)){
+        if(checkIfOnlyFakeLetters(rowIndexes[firstRowIndex], columnIndex, word)){   
           System.out.println("INTEGRATED!");
-          integrateWord(firstRowIndex, columnIndex, word); 
+          integrateWord(rowIndexes[firstRowIndex], columnIndex, word); 
           puzzleToString(); 
           integratedWithGrid = true; 
         }else{
