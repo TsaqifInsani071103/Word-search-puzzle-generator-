@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random; 
 import java.util.Arrays; 
 public class puzzleSearchGame {
-  private ArrayList<String[]> wordBank = new ArrayList<String[]>(); 
+  private ArrayList<individualLetter[]> wordBank = new ArrayList<individualLetter[]>(); 
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
@@ -78,7 +78,7 @@ public class puzzleSearchGame {
     //if lonest word is less than 10, size is 10 
     //if longest word is more than 10 and less than 30, grid size depends on number of words and if they fit 
     collectWords(); 
-    for(String[] i : this.wordBank){
+    for(individualLetter[] i : this.wordBank){
       System.out.println(Arrays.toString(i));
     }
     System.out.println(this.minGridSize); 
@@ -124,10 +124,10 @@ public class puzzleSearchGame {
     }
   } 
 
-  private String[] makeWordIntoArray(String userInput){
-    String[] wordArrayString = new String[userInput.length()]; 
+  private individualLetter[] makeWordIntoArray(String userInput){
+    individualLetter[] wordArrayString = new individualLetter[userInput.length()]; 
     for(int i = 0; i<userInput.length(); i++){
-      wordArrayString[i] = userInput.substring(i, i+1); 
+      wordArrayString[i] = new individualLetter(userInput.substring(i, i+1).toUpperCase());
     }
     return wordArrayString; 
   } 
