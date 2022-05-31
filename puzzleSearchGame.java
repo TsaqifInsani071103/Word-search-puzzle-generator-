@@ -81,7 +81,7 @@ public class puzzleSearchGame {
   private void collectWords(){
     System.out.println("Please enter your word, type in '0' when you're done");
     String userInput = askUserForWords(); 
-    while(userInput != "0"){
+    while(!userInput.equals("0")){
       this.wordBank.add(userInput); 
       userInput = askUserForWords(); 
     } 
@@ -90,7 +90,7 @@ public class puzzleSearchGame {
 
   private String askUserForWords(){
     Scanner scannerObject = new Scanner(System.in);
-    int wordCount = this.wordBank.size(); 
+    int wordCount = this.wordBank.size() + 1; 
     System.out.println("enter word " + wordCount + ": ");
     String userInput = scannerObject.next(); 
     return userInput; 
