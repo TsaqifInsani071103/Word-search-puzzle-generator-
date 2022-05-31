@@ -172,12 +172,19 @@ public class puzzleSearchGame {
     // if (this.wordBank.get(0)[0] instanceof individualLetter){
     //   System.out.println("POOP!"); 
     // } instanceof individualLetter works to check if letter is a letter object 
-    int[] columnIndexes = columnIndexesAsArray(); //random column index 
+    int[] columnIndexes = indexesAsArray(); //random column index 
+    System.out.println(Arrays.toString(columnIndexes)); 
     //check if verticalSubgrid is appropriate length, if not, move to the next column 
     //if it is, and only fake letters, put it down 
     // if it is, and there is real letters, check if the real letters are in the appropriate index in the word, if not, move down 
     //repeat 
-    for(individualLetter[] i : wordBank){
+    for(individualLetter[] word : wordBank){
+      verticalIntegration(columnIndexes, word); 
+    }
+    
+  } 
+
+  private void verticalIntegration(int[] columnIndexes, individualLetter[] word){
       boolean integrateWithGrid = false; 
       int currentChosencolumnIndex = -1; 
       while(!integrateWithGrid){
@@ -190,37 +197,36 @@ public class puzzleSearchGame {
           System.out.println("no place for this word");
           break; 
         }
-        integrateWithGrid = verticalGridCheck(columnIndexes[currentChosencolumnIndex], i); 
+        integrateWithGrid = verticalGridCheck(columnIndexes[currentChosencolumnIndex], word); 
       }
-    }
+
   } 
 
   //random vertical index 
-  private int[] columnIndexesAsArray(){
-    int[] columnIndexes = new int[this.minGridSize];
-    int indexIncrement = 1; 
+  private int[] indexesAsArray(){
+    int[] indexes = new int[this.minGridSize];
+    Arrays.fill(indexes, -1000); 
+    int indexIncrement = 0; 
     while(indexIncrement < this.minGridSize){
-      int randomIndex = uniqueIndex(columnIndexes); 
-      columnIndexes[indexIncrement] = randomIndex; 
+      int randomIndex = uniqueIndex(indexes); 
+      indexes[indexIncrement] = randomIndex; 
       indexIncrement++;
     }
-    return columnIndexes; 
+    return indexes; 
   } 
 
-  private int uniqueIndex(int[] verticalIndexArray){
+  private int uniqueIndex(int[] indexArray){
     Random randomObject = new Random(); 
     int randomUniqueIndex = randomObject.nextInt(this.minGridSize); 
-    while (arrayContainsNumber(verticalIndexArray, randomUniqueIndex)){  
+    while (arrayContainsNumber(indexArray, randomUniqueIndex)){  
       randomUniqueIndex = randomObject.nextInt(this.minGridSize); 
     }
     return randomUniqueIndex; 
   } 
 
-  private boolean arrayContainsNumber(int[] verticalIndexArray, int randomUniqueIndex){
-    for(int i : verticalIndexArray){
-      if(i == randomUniqueIndex){
-        return true; 
-      }
+  private boolean arrayContainsNumber(int[] indexArray, int randomUniqueIndex){
+    for(int i : indexArray){
+      if(i == randomUniqueIndex) return true; 
     }
     return false; 
   }
@@ -240,7 +246,7 @@ public class puzzleSearchGame {
           firstRowIndex++; 
           System.out.println("moved down one index"); 
         }
-      } else{
+      } else{ // if row index array hasnt finished yet, change firstRow Index, else, move to another column 
         System.out.println("OUT OF BOUNDS"); 
         System.out.println("moved to another column"); 
         return false; 
@@ -273,6 +279,7 @@ public class puzzleSearchGame {
     }
     return true; 
   } 
+
 
   private void integrateWord(int rowNumber, int columnNumber, individualLetter[] word){
     for(individualLetter i : word){
