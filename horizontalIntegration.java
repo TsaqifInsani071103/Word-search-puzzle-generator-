@@ -51,9 +51,9 @@ public class horizontalIntegration {
     return false; 
   }
 
-  public void integrateBackwards(individualLetter[] word){
+  public boolean integrateBackwards(individualLetter[] word){
     reverseWordArray(word, 0, word.length-1);
-    integrate(word); 
+    return integrate(word); 
   }
 
   private void reverseWordArray(individualLetter[] word, int leftPointer, int rightPointer){
@@ -65,7 +65,7 @@ public class horizontalIntegration {
       rightPointer--;
     }
   } 
-  public void integrate(individualLetter[] word){
+  public boolean integrate(individualLetter[] word){
     int[] rowIndexes = indexesAsArray(); //the row index will be the dynamic one here 
     boolean integrateWithGrid = false; 
     int currentChosenRowIndex = -1; 
@@ -77,6 +77,11 @@ public class horizontalIntegration {
         break; 
       }
       integrateWithGrid = horizontalGridCheck(rowIndexes[currentChosenRowIndex], word); 
+    }
+    if(!integrateWithGrid){
+      return false; 
+    }else{
+      return true; 
     }
   } 
 

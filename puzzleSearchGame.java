@@ -9,6 +9,8 @@ public class puzzleSearchGame {
   private int minGridSize = 10; //10 by 10 square 
   private final int MAX_GRID_SIZE = 25; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
+  private boolean gridIsFilled = true; 
+
   public void runProgram(){
     printInstructions(); 
     processUserMenuInput(); 
@@ -177,22 +179,38 @@ public class puzzleSearchGame {
     horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
     for(individualLetter[] word : wordBank){
       integrationOptions(randomObject.nextInt(4), word, integrateVertically, integrateHorizontally); 
+      if(!this.gridIsFilled) break; 
     }
+
+    if(!this.gridIsFilled){
+      reInitializeGrid();
+      fillInGrid();
+    }else{
+      return; 
+    }
+
+  } 
+
+  private void reInitializeGrid(){
+    if(this.minGridSize < this.MAX_GRID_SIZE){
+      this.minGridSize++;
+    }
+    generateInitialGrid();
   } 
 
   private void integrationOptions(int number, individualLetter[] word, verticalIntegration integrateVertically, horizontalIntegration integrateHorizontally){
     switch(number){
       case 0: 
-        integrateVertically.integrate(word);
+        this.gridIsFilled = integrateVertically.integrate(word);
         break; 
       case 1: 
-        integrateVertically.integrateBackwards(word); 
+        this.gridIsFilled = integrateVertically.integrateBackwards(word); 
         break; 
       case 2: 
-        integrateHorizontally.integrate(word);
+        this.gridIsFilled = integrateHorizontally.integrate(word);
         break; 
       case 3: 
-        integrateHorizontally.integrateBackwards(word); 
+        this.gridIsFilled = integrateHorizontally.integrateBackwards(word); 
         break; 
       default: 
         return; 
