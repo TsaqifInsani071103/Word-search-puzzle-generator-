@@ -73,7 +73,7 @@ public class horizontalIntegration {
       if(currentChosenRowIndex < rowIndexes.length-1){
         currentChosenRowIndex++; 
       }else{
-        System.out.println("no place for this word");
+        // System.out.println("no place for this word");
         break; 
       }
       integrateWithGrid = horizontalGridCheck(rowIndexes[currentChosenRowIndex], word); 

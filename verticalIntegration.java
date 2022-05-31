@@ -73,7 +73,7 @@ public class verticalIntegration {
       if(currentChosencolumnIndex < columnIndexes.length -1){
         currentChosencolumnIndex++; 
       }else{
-        System.out.println("no place for this word");
+        // System.out.println("no place for this word");
         break; 
       }
       integrateWithGrid = verticalGridCheck(columnIndexes[currentChosencolumnIndex], word); 
