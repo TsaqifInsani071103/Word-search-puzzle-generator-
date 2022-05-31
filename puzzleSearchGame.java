@@ -6,7 +6,7 @@ public class puzzleSearchGame {
   private ArrayList<individualLetter[]> wordBank = new ArrayList<individualLetter[]>(); 
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
-  private int minGridSize = 3; //10 by 10 square 
+  private int minGridSize = 10; //10 by 10 square 
   private final int MAX_GRID_SIZE = 25; //30 by 30 square 
   private String[][] puzzleGrid = {}; 
   public void runProgram(){
@@ -173,19 +173,21 @@ public class puzzleSearchGame {
     //if it is, and only fake letters, put it down 
     // if it is, and there is real letters, check if the real letters are in the appropriate index in the word, if not, move down 
     //repeat 
-    boolean integrateWithGrid = false; 
-    int currentChosencolumnIndex = -1; 
-    while(!integrateWithGrid){
-      //check if at index, to bottom, matches appropriate length 
-      //if so, check if contains only fake letters, if so integrate
-      //if not, go down. 
-      if(currentChosencolumnIndex < columnIndexes.length -1){
-        currentChosencolumnIndex++; 
-      }else{
-        break; 
+    for(individualLetter[] i : wordBank){
+      boolean integrateWithGrid = false; 
+      int currentChosencolumnIndex = -1; 
+      while(!integrateWithGrid){
+        //check if at index, to bottom, matches appropriate length 
+        //if so, check if contains only fake letters, if so integrate
+        //if not, go down. 
+        if(currentChosencolumnIndex < columnIndexes.length -1){
+          currentChosencolumnIndex++; 
+        }else{
+          System.out.println("no place for this word");
+          break; 
+        }
+        integrateWithGrid = verticalGridCheck(columnIndexes[currentChosencolumnIndex], i); 
       }
-      integrateWithGrid = verticalGridCheck(columnIndexes[currentChosencolumnIndex], this.wordBank.get(0)); 
-      System.out.println("moved to another column"); 
     }
   } 
 
@@ -227,10 +229,16 @@ public class puzzleSearchGame {
       if(checkIfWithinBounds(firstRowIndex, lengthOfWord)){
         if(checkIfOnlyFakeLetters(firstRowIndex, columnIndex, word)){   
           System.out.println("INTEGRATED!");
+          integrateWord(firstRowIndex, columnIndex, word); 
+          puzzleToString(); 
           integratedWithGrid = true; 
+        }else{
+          firstRowIndex++; 
+          System.out.println("moved down one index"); 
         }
       } else{
         System.out.println("OUT OF BOUNDS"); 
+        System.out.println("moved to another column"); 
         return false; 
       }
     }
@@ -250,8 +258,11 @@ public class puzzleSearchGame {
   private boolean checkIfOnlyFakeLetters(int firstRowIndex, int columnIndex, individualLetter[] word){
     for(int i = 0; i<word.length; i ++){
       try{
-        if(this.puzzleGrid[firstRowIndex][columnIndex] instanceof String){
+        //delete the equals X later and the return to false 
+        if(this.puzzleGrid[firstRowIndex][columnIndex] instanceof String && this.puzzleGrid[firstRowIndex][columnIndex].equals("X")){
           continue; 
+        }else{
+          return false; 
         }
       }catch(Exception e){
         if(!word[i].toString().equals(this.puzzleGrid[firstRowIndex][columnIndex])){
@@ -263,8 +274,12 @@ public class puzzleSearchGame {
     return true; 
   } 
 
-
-
+  private void integrateWord(int rowNumber, int columnNumber, individualLetter[] word){
+    for(individualLetter i : word){
+      this.puzzleGrid[rowNumber][columnNumber] = i.toString(); 
+      rowNumber ++; 
+    }
+  } 
 
 
 }
