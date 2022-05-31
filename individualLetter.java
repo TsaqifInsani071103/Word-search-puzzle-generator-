@@ -10,6 +10,6 @@ public class individualLetter {
   }
 
   public String toString(){
-    return this.letter + " letter"; 
+    return this.letter; 
   } 
 }
