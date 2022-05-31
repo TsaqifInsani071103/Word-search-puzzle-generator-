@@ -7,7 +7,7 @@ public class puzzleSearchGame {
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 10; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
 
@@ -191,8 +191,10 @@ public class puzzleSearchGame {
       reInitializeGrid();
       fillInGrid();
     }else{
+      puzzleToString();
       return; 
     }
+
 
   } 
 
@@ -220,6 +222,5 @@ public class puzzleSearchGame {
       default: 
         return; 
     }
-
   } 
 }

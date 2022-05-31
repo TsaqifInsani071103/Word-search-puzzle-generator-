@@ -96,7 +96,7 @@ public class horizontalIntegration {
         if(checkIfOnlyFakeLetters(columnIndexes[firstColumnIndex], rowIndex, word)){   
           System.out.println("INTEGRATED!");
           integrateWord(columnIndexes[firstColumnIndex], rowIndex, word); 
-          puzzleToString(); 
+          // puzzleToString(); //uncomment this later 
           integratedWithGrid = true; 
         }else{
           firstColumnIndex++; 

@@ -97,7 +97,7 @@ public class verticalIntegration {
         if(checkIfOnlyFakeLetters(rowIndexes[firstRowIndex], columnIndex, word)){   
           System.out.println("INTEGRATED!");
           integrateWord(rowIndexes[firstRowIndex], columnIndex, word); 
-          puzzleToString(); 
+          // puzzleToString(); //uncomment this later
           integratedWithGrid = true; 
         }else{
           firstRowIndex++; 
@@ -139,7 +139,7 @@ public class verticalIntegration {
   private void integrateWord(int rowNumber, int columnNumber, individualLetter[] word){
     for(individualLetter i : word){
       this.puzzleGrid[rowNumber][columnNumber] = new individualMultipleTypes(null, i, "v"); 
-      rowNumber ++; 
+      rowNumber++; 
     }
   } 
 }
