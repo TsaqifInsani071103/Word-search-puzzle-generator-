@@ -8,7 +8,7 @@ public class puzzleSearchGame {
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
   private final int MAX_GRID_SIZE = 25; //30 by 30 square 
-  private String[][] puzzleGrid = {}; 
+  private individualMultipleTypes[][] puzzleGrid = {}; 
   public void runProgram(){
     printInstructions(); 
     processUserMenuInput(); 
@@ -143,12 +143,12 @@ public class puzzleSearchGame {
 
   private void generateInitialGrid(){
     Random randomObject = new Random(); 
-    this.puzzleGrid = new String[this.minGridSize][]; 
+    this.puzzleGrid = new individualMultipleTypes[this.minGridSize][]; 
     for(int i = 0; i<this.minGridSize; i++){
-      String[] puzzleRow = new String[this.minGridSize]; 
+      individualMultipleTypes[] puzzleRow = new individualMultipleTypes[this.minGridSize]; 
       for(int j = 0; j<this.minGridSize; j++){
         // puzzleRow[j] = this.ALPHABET[randomObject.nextInt(26)]; // uncomment this later 
-        puzzleRow[j] = "X";
+        puzzleRow[j] = new individualMultipleTypes("X", null);
       }
       this.puzzleGrid[i] = puzzleRow; 
     }
@@ -158,7 +158,11 @@ public class puzzleSearchGame {
   private void puzzleToString(){
     for(int i = 0; i < this.minGridSize; i ++){
       for (int j = 0; j<this.minGridSize; j++){
-        System.out.print(this.puzzleGrid[i][j] + " ");
+        if(this.puzzleGrid[i][j].getRealValue() != null){
+          System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
+        }else{
+          System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
+        }
       }
       System.out.println(); 
     }
@@ -248,7 +252,7 @@ public class puzzleSearchGame {
   private boolean checkIfWithinBounds(int firstIndex, int length){
     int lastIndex = firstIndex + length - 1;
     try{
-      String[] check = puzzleGrid[lastIndex]; 
+      individualMultipleTypes[] check = puzzleGrid[lastIndex]; 
       return true; 
     } catch(Exception e){
       return false; 
@@ -258,14 +262,13 @@ public class puzzleSearchGame {
   private boolean checkIfOnlyFakeLetters(int firstRowIndex, int columnIndex, individualLetter[] word){
     for(int i = 0; i<word.length; i ++){
       try{
-        //delete the equals X later and the return to false 
-        if(this.puzzleGrid[firstRowIndex][columnIndex] instanceof String && this.puzzleGrid[firstRowIndex][columnIndex].equals("X")){
+        if(this.puzzleGrid[firstRowIndex][columnIndex].getRealValue() == null){
+          System.out.println("ITS A FAKE LETTER!"); 
+          firstRowIndex++; 
           continue; 
-        }else{
-          return false; 
         }
       }catch(Exception e){
-        if(!word[i].toString().equals(this.puzzleGrid[firstRowIndex][columnIndex])){
+        if(!word[i].equals(this.puzzleGrid[firstRowIndex][columnIndex].getRealValue())){
           return false; 
         }
         continue; 
@@ -276,7 +279,7 @@ public class puzzleSearchGame {
 
   private void integrateWord(int rowNumber, int columnNumber, individualLetter[] word){
     for(individualLetter i : word){
-      this.puzzleGrid[rowNumber][columnNumber] = i.toString(); 
+      this.puzzleGrid[rowNumber][columnNumber] = new individualMultipleTypes(null, i); 
       rowNumber ++; 
     }
   } 
