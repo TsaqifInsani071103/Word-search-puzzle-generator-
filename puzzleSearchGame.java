@@ -7,7 +7,7 @@ public class puzzleSearchGame {
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 10; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
   private int wordsFilled = 0; 
@@ -83,8 +83,7 @@ public class puzzleSearchGame {
     //if longest word is more than 10 and less than 30, grid size depends on number of words and if they fit 
     collectWords(); 
     System.out.println(this.minGridSize); 
-    generateInitialGrid(); 
-    puzzleToString();  
+    generateInitialGrid();  
     fillInGrid(); 
 
     
@@ -190,6 +189,7 @@ public class puzzleSearchGame {
         turn++; 
       }
       if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
+        this.wordsFilled = 0; 
         break; 
       }else if (this.gridIsFilled){
         this.wordsFilled++; 
