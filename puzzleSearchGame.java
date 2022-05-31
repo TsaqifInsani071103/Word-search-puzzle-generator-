@@ -172,53 +172,15 @@ public class puzzleSearchGame {
     // if (this.wordBank.get(0)[0] instanceof individualLetter){
     //   System.out.println("POOP!"); 
     // } instanceof individualLetter works to check if letter is a letter object 
-    int[] columnIndexes = indexesAsArray(); //random column index 
-    System.out.println(Arrays.toString(columnIndexes)); 
     //check if verticalSubgrid is appropriate length, if not, move to the next column 
     //if it is, and only fake letters, put it down 
     // if it is, and there is real letters, check if the real letters are in the appropriate index in the word, if not, move down 
     //repeat 
     for(individualLetter[] word : wordBank){
       verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
-      integrateVertically.integrate(columnIndexes, word); 
+      integrateVertically.integrateBackwards(word); 
     }
     
   } 
 
-
-  //random vertical index 
-  private int[] indexesAsArray(){
-    int[] indexes = new int[this.minGridSize];
-    Arrays.fill(indexes, -1000); 
-    int indexIncrement = 0; 
-    while(indexIncrement < this.minGridSize){
-      int randomIndex = uniqueIndex(indexes); 
-      indexes[indexIncrement] = randomIndex; 
-      indexIncrement++;
-    }
-    return indexes; 
-  } 
-
-  private int uniqueIndex(int[] indexArray){
-    Random randomObject = new Random(); 
-    int randomUniqueIndex = randomObject.nextInt(this.minGridSize); 
-    while (arrayContainsNumber(indexArray, randomUniqueIndex)){  
-      randomUniqueIndex = randomObject.nextInt(this.minGridSize); 
-    }
-    return randomUniqueIndex; 
-  } 
-
-  private boolean arrayContainsNumber(int[] indexArray, int randomUniqueIndex){
-    for(int i : indexArray){
-      if(i == randomUniqueIndex) return true; 
-    }
-    return false; 
-  }
-
-  private void integrateWord(int rowNumber, int columnNumber, individualLetter[] word){
-    for(individualLetter i : word){
-      this.puzzleGrid[rowNumber][columnNumber] = new individualMultipleTypes(null, i); 
-      rowNumber ++; 
-    }
-  } 
 }

@@ -51,8 +51,22 @@ public class verticalIntegration {
     return false; 
   }
 
+  public void integrateBackwards(individualLetter[] word){
+    reverseWordArray(word, 0, word.length-1);
+    integrate(word); 
+  }
 
-  public void integrate(int[] columnIndexes, individualLetter[] word){
+  private void reverseWordArray(individualLetter[] word, int leftPointer, int rightPointer){
+    while(!(leftPointer >= rightPointer)){
+      individualLetter tempWord = word[leftPointer];
+      word[leftPointer] = word[rightPointer];
+      word[rightPointer] = tempWord; 
+      leftPointer++;
+      rightPointer--;
+    }
+  } 
+  public void integrate(individualLetter[] word){
+    int[] columnIndexes = indexesAsArray();
     boolean integrateWithGrid = false; 
     int currentChosencolumnIndex = -1; 
     while(!integrateWithGrid){
