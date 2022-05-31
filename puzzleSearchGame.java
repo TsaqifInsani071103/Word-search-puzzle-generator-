@@ -281,13 +281,10 @@ public class puzzleSearchGame {
     return true; 
   } 
 
-
   private void integrateWord(int rowNumber, int columnNumber, individualLetter[] word){
     for(individualLetter i : word){
       this.puzzleGrid[rowNumber][columnNumber] = new individualMultipleTypes(null, i); 
       rowNumber ++; 
     }
   } 
-
-
 }
