@@ -6,7 +6,7 @@ public class puzzleSearchGame {
   private ArrayList<individualLetter[]> wordBank = new ArrayList<individualLetter[]>(); 
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
-  private int minGridSize = 5; //10 by 10 square 
+  private int minGridSize = 10; //10 by 10 square 
   private final int MAX_GRID_SIZE = 25; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   public void runProgram(){
@@ -176,11 +176,24 @@ public class puzzleSearchGame {
     //if it is, and only fake letters, put it down 
     // if it is, and there is real letters, check if the real letters are in the appropriate index in the word, if not, move down 
     //repeat 
+    Random randomObject = new Random(); 
     for(individualLetter[] word : wordBank){
-      verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
-      integrateVertically.integrateBackwards(word); 
+      integrationOptions(randomObject.nextInt(2), word); 
     }
-    
   } 
 
+  private void integrationOptions(int number, individualLetter[] word){
+    verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
+    switch(number){
+      case 0: 
+        integrateVertically.integrate(word);
+        break; 
+      case 1: 
+        integrateVertically.integrateBackwards(word); 
+        break; 
+      default: 
+        return; 
+    }
+
+  } 
 }
