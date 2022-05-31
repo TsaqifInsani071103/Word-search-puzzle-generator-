@@ -15,6 +15,10 @@ public class individualLetter {
     return this.letter; 
   }
 
+  public String toStringReal(){
+    return this.letter; 
+  }
+
   private String toStringHorizontal(){
     return ANSI_GREEN + this.letter + ANSI_RESET; 
   } 

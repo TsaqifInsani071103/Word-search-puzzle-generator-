@@ -126,8 +126,7 @@ public class horizontalIntegration {
       individualMultipleTypes gridBlock = this.puzzleGrid[rowIndex][firstColumnIndex]; 
       if(gridBlock.getRealValue() == null){//check if letter is fake latter 
         continue; 
-      }else if(gridBlock.getRealValue().toString().equals(word[i].toString())){
-        System.out.println("EQUAL"); 
+      }else if(gridBlock.getRealValue().toStringReal().equals(word[i].toString())){
         continue; 
       }else{
         return false; 

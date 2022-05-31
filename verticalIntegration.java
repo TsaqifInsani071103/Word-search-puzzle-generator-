@@ -87,34 +87,6 @@ public class verticalIntegration {
 
   } 
 
-  // private void incrementAndRestart(){
-  //   this.minGridSize = puzzleGrid.length; 
-  //   individualMultipleTypes[][] newPuzzleGrid = {}; 
-  //   if(this.minGridSize + 1 < this.MAX_GRID_SIZE){
-  //     this.minGridSize += 1; 
-  //     newPuzzleGrid = new individualMultipleTypes[this.minGridSize][]; 
-  //     for(int i = 0; i<this.minGridSize; i++){
-  //       if(i < this.minGridSize-1){
-  //         individualMultipleTypes[] currentRow = this.puzzleGrid[i]; 
-  //         individualMultipleTypes[] newRow = new individualMultipleTypes[this.minGridSize]; 
-  //         for(int j = 0; j <this.minGridSize; j++){
-  //           if(j == this.minGridSize-1){
-  //             newRow[j] = new individualMultipleTypes("X", null, null);
-  //           }else{
-  //             newRow[j] = currentRow[j]; 
-  //           }
-  //         }
-  //         newPuzzleGrid[i] = newRow; 
-  //       }else{
-  //         individualMultipleTypes[] newRow = new individualMultipleTypes[this.minGridSize]; 
-  //         Arrays.fill(newRow, new individualMultipleTypes("X", null, null));
-  //         newPuzzleGrid[i] = newRow; 
-  //       }
-  //     }
-  //   }
-  //   this.puzzleGrid = newPuzzleGrid; 
-  // }
-
   private boolean verticalGridCheck(int columnIndex, individualLetter[] word){
     int[] rowIndexes = indexesAsArray();
     int firstRowIndex = 0; 
@@ -155,8 +127,7 @@ public class verticalIntegration {
       individualMultipleTypes gridBlock = this.puzzleGrid[firstRowIndex][columnIndex]; 
       if(gridBlock.getRealValue() == null){//check if letter is fake latter 
         continue; 
-      }else if(gridBlock.getRealValue().toString().equals(word[i].toString())){
-        System.out.println("EQUAL"); 
+      }else if(gridBlock.getRealValue().toStringReal().equals(word[i].toString())){
         continue; 
       }else{
         return false; 

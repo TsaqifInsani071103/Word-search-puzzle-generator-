@@ -7,7 +7,7 @@ public class puzzleSearchGame {
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 10; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
 
@@ -174,15 +174,20 @@ public class puzzleSearchGame {
     //if it is, and only fake letters, put it down 
     // if it is, and there is real letters, check if the real letters are in the appropriate index in the word, if not, move down 
     //repeat 
-    Random randomObject = new Random(); 
     verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
     horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
+    int turn = 0; 
     for(individualLetter[] word : wordBank){
-      integrationOptions(randomObject.nextInt(4), word, integrateVertically, integrateHorizontally); 
-      if(!this.gridIsFilled) break; 
+      integrationOptions(turn, word, integrateVertically, integrateHorizontally); 
+      if(turn + 1 >= 4){
+        turn =0;
+      }else{
+        turn++; 
+      }
+      if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE) break; 
     }
 
-    if(!this.gridIsFilled){
+    if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
       reInitializeGrid();
       fillInGrid();
     }else{

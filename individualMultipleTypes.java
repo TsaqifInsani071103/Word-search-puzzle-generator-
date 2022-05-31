@@ -15,7 +15,7 @@ public class individualMultipleTypes {
     } 
   
     public individualLetter getRealValue(){
-      if(this.stateColor != null)realLetter.changeState(this.stateColor); 
+      if(this.stateColor != null) realLetter.changeState(this.stateColor); 
       return realLetter; 
     } 
 
