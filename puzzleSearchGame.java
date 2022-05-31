@@ -144,7 +144,7 @@ public class puzzleSearchGame {
     for(int i = 0; i<this.minGridSize; i++){
       individualMultipleTypes[] puzzleRow = new individualMultipleTypes[this.minGridSize]; 
       for(int j = 0; j<this.minGridSize; j++){
-        puzzleRow[j] = new individualMultipleTypes(ALPHABET[randomObject.nextInt(26)], null);
+        puzzleRow[j] = new individualMultipleTypes(ALPHABET[randomObject.nextInt(26)], null, null);
       }
       this.puzzleGrid[i] = puzzleRow; 
     }

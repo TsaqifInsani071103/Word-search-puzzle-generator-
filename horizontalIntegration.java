@@ -132,7 +132,7 @@ public class horizontalIntegration {
 
   private void integrateWord(int columnNumber, int rowNumber, individualLetter[] word){
     for(individualLetter i : word){
-      this.puzzleGrid[rowNumber][columnNumber] = new individualMultipleTypes(null, i); 
+      this.puzzleGrid[rowNumber][columnNumber] = new individualMultipleTypes(null, i, "h"); 
       columnNumber ++; 
     }
   } 

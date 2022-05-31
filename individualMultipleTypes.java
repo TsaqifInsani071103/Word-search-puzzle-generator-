@@ -2,10 +2,12 @@ public class individualMultipleTypes {
 
     private individualLetter realLetter;
     private String fakeLetter;
+    private String stateColor; 
   
-    public individualMultipleTypes(String fakeLetter, individualLetter realLetter){
+    public individualMultipleTypes(String fakeLetter, individualLetter realLetter, String stateColor){
       this.fakeLetter = fakeLetter; 
       this.realLetter = realLetter;
+      this.stateColor = stateColor; 
     } 
     
     public String getFakeValue(){
@@ -13,6 +15,7 @@ public class individualMultipleTypes {
     } 
   
     public individualLetter getRealValue(){
+      if(this.stateColor != null)realLetter.changeState(this.stateColor); 
       return realLetter; 
     } 
 
