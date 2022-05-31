@@ -95,7 +95,7 @@ public class verticalIntegration {
     while(!integratedWithGrid){
       if(checkIfWithinBounds(rowIndexes[firstRowIndex], lengthOfWord)){
         if(checkIfOnlyFakeLetters(rowIndexes[firstRowIndex], columnIndex, word)){   
-          System.out.println("INTEGRATED!");
+          // System.out.println("INTEGRATED!");
           integrateWord(rowIndexes[firstRowIndex], columnIndex, word); 
           // puzzleToString(); //uncomment this later
           integratedWithGrid = true; 

@@ -7,7 +7,7 @@ public class puzzleSearchGame {
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 15; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
 
@@ -167,19 +167,22 @@ public class puzzleSearchGame {
   } 
 
   private void fillInGrid(){
-    // if (this.wordBank.get(0)[0] instanceof individualLetter){
-    //   System.out.println("POOP!"); 
-    // } instanceof individualLetter works to check if letter is a letter object 
-    //check if verticalSubgrid is appropriate length, if not, move to the next column 
-    //if it is, and only fake letters, put it down 
-    // if it is, and there is real letters, check if the real letters are in the appropriate index in the word, if not, move down 
-    //repeat 
     verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
     horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
     diagonalIntegration integrateDiagonally = new diagonalIntegration(this.minGridSize, this.puzzleGrid); 
     int turn = 0; 
     for(individualLetter[] word : wordBank){
+      int incrementCheck = 1; 
       integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
+      while(!this.gridIsFilled && incrementCheck <= 6){
+        incrementCheck++; 
+        if(turn + 1 >= 6){
+          turn =0;
+        }else{
+          turn++; 
+        }
+        integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
+      }
       if(turn + 1 >= 6){
         turn =0;
       }else{

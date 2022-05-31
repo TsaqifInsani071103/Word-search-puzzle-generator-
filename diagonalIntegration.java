@@ -74,7 +74,7 @@ public class diagonalIntegration {
       if(currentChosenRowIndex < rowIndexes.length-1){
         currentChosenRowIndex++; 
       }else{
-        System.out.println("no place for this word");
+        // System.out.println("no place for this word");
         break; 
       }
       integrateWithGrid = diagonalGridCheck(rowIndexes[currentChosenRowIndex], word); 
@@ -96,9 +96,8 @@ public class diagonalIntegration {
       if(ifRowWithinBounds(rowIndex, lengthOfWord)){
         if(ifForwardColumnWithinBounds(columnIndexes[firstColumnIndex], lengthOfWord)){
           if(checkIfOnlyFakeLettersForward(columnIndexes[firstColumnIndex], rowIndex, word)){   
-            System.out.println("INTEGRATED!");
+            // System.out.println("INTEGRATED!");
             integrateWordForward(columnIndexes[firstColumnIndex], rowIndex, word); 
-            puzzleToString(); //uncomment this later 
             integratedWithGrid = true; 
           }else{
             if(firstColumnIndex + 1 < columnIndexes.length){
@@ -108,11 +107,9 @@ public class diagonalIntegration {
             }
           }
         }else if(ifBackwardColumnWithinBounds(columnIndexes[firstColumnIndex], lengthOfWord)){
-          System.out.println(columnIndexes[firstColumnIndex]); 
           if(checkIfOnlyFakeLettersBackward(columnIndexes[firstColumnIndex], rowIndex, word)){
-            System.out.println("INTEGRATED!");
+            // System.out.println("INTEGRATED!");
             integrateWordBackward(columnIndexes[firstColumnIndex], rowIndex, word); 
-            puzzleToString(); //uncomment this later 
             integratedWithGrid = true;
           }else{
             if(firstColumnIndex + 1 < columnIndexes.length){
@@ -128,9 +125,7 @@ public class diagonalIntegration {
             return false; 
           } 
         }
-      } else{ // mvoe to another row  
-        // System.out.println("OUT OF BOUNDS"); 
-        // System.out.println("moved to another row"); 
+      } else{ 
         return false; 
       }
     }
