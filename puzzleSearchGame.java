@@ -1,10 +1,11 @@
 import java.util.Scanner; 
 import java.util.ArrayList; 
+import java.util.Arrays; 
 public class puzzleSearchGame {
   private ArrayList<String> wordBank = new ArrayList<String>(); 
   private int minGridSize = 10; //10 by 10 square 
   private final int MAX_GRID_SIZE = 30; //30 by 30 square 
-
+  private String[][] puzzleGrid = {}; 
   public void runProgram(){
     printInstructions(); 
     processUserMenuInput(); 
@@ -76,6 +77,8 @@ public class puzzleSearchGame {
     collectWords(); 
     System.out.println(this.wordBank.toString()); 
     System.out.println(this.minGridSize); 
+    generateGrid(); 
+    puzzleToString();  
     
     
   } 
@@ -120,5 +123,25 @@ public class puzzleSearchGame {
       this.minGridSize = userInput.length(); 
     } 
   }
+
+  private void generateGrid(){
+    this.puzzleGrid = new String[this.minGridSize][]; 
+    for(int i = 0; i<this.minGridSize; i++){
+      this.puzzleGrid[i] = new String[this.minGridSize]; 
+    }
+  } 
+
+
+  private void puzzleToString(){
+    for(int i = 0; i < this.minGridSize; i ++){
+      for (int j = 0; j<this.minGridSize; j++){
+        System.out.print(this.puzzleGrid[i][j] + " ");
+      }
+      System.out.println(); 
+      System.out.println(); 
+    }
+  } 
+
+
 
 }
