@@ -7,9 +7,10 @@ public class puzzleSearchGame {
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 10; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
+  private int wordsFilled = 0; 
 
   public void runProgram(){
     printInstructions(); 
@@ -177,7 +178,7 @@ public class puzzleSearchGame {
       while(!this.gridIsFilled && incrementCheck <= 6){
         incrementCheck++; 
         if(turn + 1 >= 6){
-          turn =0;
+          turn = 0;
         }else{
           turn++; 
         }
@@ -188,14 +189,19 @@ public class puzzleSearchGame {
       }else{
         turn++; 
       }
-      if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE) break; 
+      if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
+        break; 
+      }else if (this.gridIsFilled){
+        this.wordsFilled++; 
+      }; 
     }
 
     if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
       reInitializeGrid();
       fillInGrid();
+      this.wordsFilled = 0; 
     }else{
-      System.out.println(); 
+      System.out.println(wordsFilled); 
       puzzleToString();
       return; 
     }
@@ -204,6 +210,8 @@ public class puzzleSearchGame {
   private void reInitializeGrid(){
     if(this.minGridSize < this.MAX_GRID_SIZE){
       this.minGridSize++;
+    }else{
+      System.out.println("No more space"); 
     }
     generateInitialGrid();
   } 
