@@ -10,15 +10,19 @@ public class puzzleSearchGame {
     processUserMenuInput(); 
   } 
   
-  public void printInstructions(){
+  private void printInstructions(){
     System.out.println("Welcome to my word search generator!");
     System.out.println("This program will allow you to generate your own word search puzzle");
     System.out.println("Please select an option: ");
+    printInputOptions();
+  }
+
+  private void printInputOptions(){
     System.out.println("\t Generate a new word search (g)");
     System.out.println("\t Print out your word search (p)");
     System.out.println("\t Show the solution to your word search (s)");
     System.out.println("\t Quit the program (q)");
-  }
+  } 
 
   private void processUserMenuInput(){
     Scanner scannerObject = new Scanner(System.in); 
@@ -47,10 +51,7 @@ public class puzzleSearchGame {
   private String askForValidInput(){
     Scanner scannerObject = new Scanner(System.in); 
     System.out.println("Your input is invalid, please consider re-typing in the following options: ");
-    System.out.println("\t Generate a new word search (g)");
-    System.out.println("\t Print out your word search (p)");
-    System.out.println("\t Show the solution to your word search (s)");
-    System.out.println("\t Quit the program (q)");
+    printInputOptions();
     String userInput = scannerObject.next(); 
     return userInput; 
   } 
