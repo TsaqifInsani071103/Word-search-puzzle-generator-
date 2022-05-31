@@ -56,9 +56,6 @@ public class verticalIntegration {
     boolean integrateWithGrid = false; 
     int currentChosencolumnIndex = -1; 
     while(!integrateWithGrid){
-      //check if at index, to bottom, matches appropriate length 
-      //if so, check if contains only fake letters, if so integrate
-      //if not, go down. 
       if(currentChosencolumnIndex < columnIndexes.length -1){
         currentChosencolumnIndex++; 
       }else{
