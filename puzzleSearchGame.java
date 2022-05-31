@@ -174,18 +174,25 @@ public class puzzleSearchGame {
     //repeat 
     Random randomObject = new Random(); 
     for(individualLetter[] word : wordBank){
-      integrationOptions(randomObject.nextInt(2), word); 
+      integrationOptions(randomObject.nextInt(4), word); 
     }
   } 
 
   private void integrationOptions(int number, individualLetter[] word){
     verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
+    horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
     switch(number){
       case 0: 
         integrateVertically.integrate(word);
         break; 
       case 1: 
         integrateVertically.integrateBackwards(word); 
+        break; 
+      case 2: 
+        integrateHorizontally.integrate(word);
+        break; 
+      case 3: 
+        integrateHorizontally.integrateBackwards(word); 
         break; 
       default: 
         return; 

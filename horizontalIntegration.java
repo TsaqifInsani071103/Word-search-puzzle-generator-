@@ -1,10 +1,10 @@
 import java.util.Arrays; 
 import java.util.Random; 
-public class verticalIntegration {
+public class horizontalIntegration {
   private int minGridSize; 
   private individualMultipleTypes[][] puzzleGrid; 
 
-  public verticalIntegration(int minGridSize, individualMultipleTypes[][] puzzleGrid){
+  public horizontalIntegration(int minGridSize, individualMultipleTypes[][] puzzleGrid){
     this.minGridSize = minGridSize; 
     this.puzzleGrid = puzzleGrid; 
   } 
@@ -66,40 +66,39 @@ public class verticalIntegration {
     }
   } 
   public void integrate(individualLetter[] word){
-    int[] columnIndexes = indexesAsArray();
+    int[] rowIndexes = indexesAsArray(); //the row index will be the dynamic one here 
     boolean integrateWithGrid = false; 
-    int currentChosencolumnIndex = -1; 
+    int currentChosenRowIndex = -1; 
     while(!integrateWithGrid){
-      if(currentChosencolumnIndex < columnIndexes.length -1){
-        currentChosencolumnIndex++; 
+      if(currentChosenRowIndex < rowIndexes.length-1){
+        currentChosenRowIndex++; 
       }else{
         System.out.println("no place for this word");
         break; 
       }
-      integrateWithGrid = verticalGridCheck(columnIndexes[currentChosencolumnIndex], word); 
+      integrateWithGrid = horizontalGridCheck(rowIndexes[currentChosenRowIndex], word); 
     }
-
 } 
 
-  private boolean verticalGridCheck(int columnIndex, individualLetter[] word){
-    int[] rowIndexes = indexesAsArray();
-    int firstRowIndex = 0; 
+  private boolean horizontalGridCheck(int rowIndex, individualLetter[] word){
+    int[] columnIndexes = indexesAsArray();
+    int firstColumnIndex = 0; 
     int lengthOfWord = word.length; 
     boolean integratedWithGrid = false; 
     while(!integratedWithGrid){
-      if(checkIfWithinBounds(rowIndexes[firstRowIndex], lengthOfWord)){
-        if(checkIfOnlyFakeLetters(rowIndexes[firstRowIndex], columnIndex, word)){   
+      if(checkIfWithinBounds(columnIndexes[firstColumnIndex], lengthOfWord)){
+        if(checkIfOnlyFakeLetters(columnIndexes[firstColumnIndex], rowIndex, word)){   
           System.out.println("INTEGRATED!");
-          integrateWord(rowIndexes[firstRowIndex], columnIndex, word); 
+          integrateWord(columnIndexes[firstColumnIndex], rowIndex, word); 
           puzzleToString(); 
           integratedWithGrid = true; 
         }else{
-          firstRowIndex++; 
+          firstColumnIndex++; 
           System.out.println("moved down one index"); 
         }
-      } else{ // if row index array hasnt finished yet, change firstRow Index, else, move to another column 
+      } else{ // mvoe to another row  
         System.out.println("OUT OF BOUNDS"); 
-        System.out.println("moved to another column"); 
+        System.out.println("moved to another row"); 
         return false; 
       }
     }
@@ -116,9 +115,9 @@ public class verticalIntegration {
     }
   } 
 
-  private boolean checkIfOnlyFakeLetters(int firstRowIndex, int columnIndex, individualLetter[] word){
-    for(int i = 0; i<word.length; i++, firstRowIndex++){
-      individualMultipleTypes gridBlock = this.puzzleGrid[firstRowIndex][columnIndex]; 
+  private boolean checkIfOnlyFakeLetters(int firstColumnIndex, int rowIndex, individualLetter[] word){
+    for(int i = 0; i<word.length; i++, firstColumnIndex++){
+      individualMultipleTypes gridBlock = this.puzzleGrid[rowIndex][firstColumnIndex]; 
       if(gridBlock.getRealValue() == null){//check if letter is fake latter 
         continue; 
       }else if(gridBlock.getRealValue().toString().equals(word[i].toString())){
@@ -131,10 +130,11 @@ public class verticalIntegration {
     return true; 
   } 
 
-  private void integrateWord(int rowNumber, int columnNumber, individualLetter[] word){
+  private void integrateWord(int columnNumber, int rowNumber, individualLetter[] word){
     for(individualLetter i : word){
       this.puzzleGrid[rowNumber][columnNumber] = new individualMultipleTypes(null, i); 
-      rowNumber ++; 
+      columnNumber ++; 
     }
   } 
 }
+
