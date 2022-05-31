@@ -74,18 +74,26 @@ public class puzzleSearchGame {
     //if lonest word is less than 10, size is 10 
     //if longest word is more than 10 and less than 30, grid size depends on number of words and if they fit 
     collectWords(); 
+    System.out.println(this.wordBank.toString()); 
     
     
   } 
 
   private void collectWords(){
     System.out.println("Please enter your word, type in '0' when you're done");
-    String userInput = askUserForWords(); 
+    String userInput = "placeholder"; 
     while(!userInput.equals("0")){
-      this.wordBank.add(userInput); 
       userInput = askUserForWords(); 
-    } 
-    System.out.println(this.wordBank.toString());  
+      if(!userInput.equals("0")) processWordInput(userInput);
+    }  
+  } 
+
+  private void processWordInput(String userInput){
+    if(checkIfString(userInput)){
+      this.wordBank.add(userInput); 
+    }else{
+      System.out.println("invalid input, please try again"); 
+    }
   } 
 
   private String askUserForWords(){
@@ -94,6 +102,15 @@ public class puzzleSearchGame {
     System.out.println("enter word " + wordCount + ": ");
     String userInput = scannerObject.next(); 
     return userInput; 
+  } 
+
+  private boolean checkIfString(String userInput){
+    try{
+      Integer.parseInt(userInput);
+      return false; 
+    } catch(Exception e){
+      return true; 
+    }
   } 
 
 }
