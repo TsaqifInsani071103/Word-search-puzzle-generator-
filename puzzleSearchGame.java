@@ -1,10 +1,13 @@
 import java.util.Scanner; 
 import java.util.ArrayList; 
+import java.util.Random; 
 import java.util.Arrays; 
 public class puzzleSearchGame {
-  private ArrayList<String> wordBank = new ArrayList<String>(); 
+  private ArrayList<String[]> wordBank = new ArrayList<String[]>(); 
+  private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
+  "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 30; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
   private String[][] puzzleGrid = {}; 
   public void runProgram(){
     printInstructions(); 
@@ -75,10 +78,13 @@ public class puzzleSearchGame {
     //if lonest word is less than 10, size is 10 
     //if longest word is more than 10 and less than 30, grid size depends on number of words and if they fit 
     collectWords(); 
-    System.out.println(this.wordBank.toString()); 
+    for(String[] i : this.wordBank){
+      System.out.println(Arrays.toString(i));
+    }
     System.out.println(this.minGridSize); 
-    generateGrid(); 
+    generateInitialGrid(); 
     puzzleToString();  
+
     
     
   } 
@@ -94,7 +100,7 @@ public class puzzleSearchGame {
 
   private void processWordInput(String userInput){
     if(checkIfString(userInput)){
-      this.wordBank.add(userInput); 
+      this.wordBank.add(makeWordIntoArray(userInput)); 
       setMinimumGridLength(userInput);
     }else{
       System.out.println("invalid input, please try again"); 
@@ -118,16 +124,29 @@ public class puzzleSearchGame {
     }
   } 
 
+  private String[] makeWordIntoArray(String userInput){
+    String[] wordArrayString = new String[userInput.length()]; 
+    for(int i = 0; i<userInput.length(); i++){
+      wordArrayString[i] = userInput.substring(i, i+1); 
+    }
+    return wordArrayString; 
+  } 
+
   private void setMinimumGridLength(String userInput){
     if (userInput.length() > this.minGridSize && userInput.length() < this.MAX_GRID_SIZE){
       this.minGridSize = userInput.length(); 
     } 
   }
 
-  private void generateGrid(){
+  private void generateInitialGrid(){
+    Random randomObject = new Random(); 
     this.puzzleGrid = new String[this.minGridSize][]; 
     for(int i = 0; i<this.minGridSize; i++){
-      this.puzzleGrid[i] = new String[this.minGridSize]; 
+      String[] puzzleRow = new String[this.minGridSize]; 
+      for(int j = 0; j<this.minGridSize; j++){
+        puzzleRow[j] = this.ALPHABET[randomObject.nextInt(26)]; 
+      }
+      this.puzzleGrid[i] = puzzleRow; 
     }
   } 
 
@@ -137,7 +156,6 @@ public class puzzleSearchGame {
       for (int j = 0; j<this.minGridSize; j++){
         System.out.print(this.puzzleGrid[i][j] + " ");
       }
-      System.out.println(); 
       System.out.println(); 
     }
   } 
