@@ -100,7 +100,11 @@ public class verticalIntegration {
           // puzzleToString(); //uncomment this later
           integratedWithGrid = true; 
         }else{
-          firstRowIndex++; 
+          if(firstRowIndex + 1 < rowIndexes.length){
+            firstRowIndex++; 
+          }else{
+            return false; 
+          }
           // System.out.println("moved down one index"); 
         }
       } else{ // if row index array hasnt finished yet, change firstRow Index, else, move to another column 

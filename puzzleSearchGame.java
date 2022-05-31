@@ -7,7 +7,7 @@ public class puzzleSearchGame {
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 15; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
 
@@ -176,10 +176,11 @@ public class puzzleSearchGame {
     //repeat 
     verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
     horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
+    diagonalIntegration integrateDiagonally = new diagonalIntegration(this.minGridSize, this.puzzleGrid); 
     int turn = 0; 
     for(individualLetter[] word : wordBank){
-      integrationOptions(turn, word, integrateVertically, integrateHorizontally); 
-      if(turn + 1 >= 4){
+      integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
+      if(turn + 1 >= 6){
         turn =0;
       }else{
         turn++; 
@@ -191,11 +192,10 @@ public class puzzleSearchGame {
       reInitializeGrid();
       fillInGrid();
     }else{
+      System.out.println(); 
       puzzleToString();
       return; 
     }
-
-
   } 
 
   private void reInitializeGrid(){
@@ -205,7 +205,8 @@ public class puzzleSearchGame {
     generateInitialGrid();
   } 
 
-  private void integrationOptions(int number, individualLetter[] word, verticalIntegration integrateVertically, horizontalIntegration integrateHorizontally){
+  private void integrationOptions(int number, individualLetter[] word, verticalIntegration integrateVertically, 
+  horizontalIntegration integrateHorizontally, diagonalIntegration integrateDiagonally){
     switch(number){
       case 0: 
         this.gridIsFilled = integrateVertically.integrate(word);
@@ -218,6 +219,12 @@ public class puzzleSearchGame {
         break; 
       case 3: 
         this.gridIsFilled = integrateHorizontally.integrateBackwards(word); 
+        break; 
+      case 4:
+        this.gridIsFilled = integrateDiagonally.integrate(word); 
+        break; 
+      case 5:
+        this.gridIsFilled = integrateDiagonally.integrateBackwards(word); 
         break; 
       default: 
         return; 

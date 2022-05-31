@@ -99,7 +99,11 @@ public class horizontalIntegration {
           // puzzleToString(); //uncomment this later 
           integratedWithGrid = true; 
         }else{
-          firstColumnIndex++; 
+          if(firstColumnIndex + 1 < columnIndexes.length){
+            firstColumnIndex++; 
+          }else{
+            return false; 
+          }
           // System.out.println("moved down one index"); 
         }
       } else{ // mvoe to another row  
