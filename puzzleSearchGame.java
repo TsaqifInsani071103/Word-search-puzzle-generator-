@@ -64,8 +64,9 @@ public class puzzleSearchGame {
     switch(option){
       case "g":
         generateWordSearch(); 
+        break; 
       default: 
-        System.out.println("awd"); 
+        System.out.println("isyou"); 
     }
   } 
 
@@ -84,6 +85,7 @@ public class puzzleSearchGame {
     System.out.println(this.minGridSize); 
     generateInitialGrid(); 
     puzzleToString();  
+    fillInGrid(); 
 
     
     
@@ -144,7 +146,8 @@ public class puzzleSearchGame {
     for(int i = 0; i<this.minGridSize; i++){
       String[] puzzleRow = new String[this.minGridSize]; 
       for(int j = 0; j<this.minGridSize; j++){
-        puzzleRow[j] = this.ALPHABET[randomObject.nextInt(26)]; 
+        // puzzleRow[j] = this.ALPHABET[randomObject.nextInt(26)]; // uncomment this later 
+        puzzleRow[j] = "X";
       }
       this.puzzleGrid[i] = puzzleRow; 
     }
@@ -158,6 +161,23 @@ public class puzzleSearchGame {
       }
       System.out.println(); 
     }
+  } 
+
+  private void fillInGrid(){
+    // if (this.wordBank.get(0)[0] instanceof individualLetter){
+    //   System.out.println("POOP!"); 
+    // } instanceof individualLetter works to check if letter is a letter object 
+    int[] verticalIndexes = verticalIndexesAsArray(); 
+    
+
+  } 
+
+  private int[] verticalIndexesAsArray(){
+    int[] verticalIndexes = new int[this.minGridSize];
+    for (int i = 0; i < this.minGridSize; i++){
+      verticalIndexes[i] = i; 
+    }
+    return verticalIndexes; 
   } 
 
 
