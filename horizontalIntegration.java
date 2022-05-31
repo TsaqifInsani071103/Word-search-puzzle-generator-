@@ -78,7 +78,8 @@ public class horizontalIntegration {
       }
       integrateWithGrid = horizontalGridCheck(rowIndexes[currentChosenRowIndex], word); 
     }
-} 
+  } 
+
 
   private boolean horizontalGridCheck(int rowIndex, individualLetter[] word){
     int[] columnIndexes = indexesAsArray();
@@ -94,11 +95,11 @@ public class horizontalIntegration {
           integratedWithGrid = true; 
         }else{
           firstColumnIndex++; 
-          System.out.println("moved down one index"); 
+          // System.out.println("moved down one index"); 
         }
       } else{ // mvoe to another row  
-        System.out.println("OUT OF BOUNDS"); 
-        System.out.println("moved to another row"); 
+        // System.out.println("OUT OF BOUNDS"); 
+        // System.out.println("moved to another row"); 
         return false; 
       }
     }

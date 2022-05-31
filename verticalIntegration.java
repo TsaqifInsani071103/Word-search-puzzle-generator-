@@ -79,7 +79,35 @@ public class verticalIntegration {
       integrateWithGrid = verticalGridCheck(columnIndexes[currentChosencolumnIndex], word); 
     }
 
-} 
+  } 
+
+  // private void incrementAndRestart(){
+  //   this.minGridSize = puzzleGrid.length; 
+  //   individualMultipleTypes[][] newPuzzleGrid = {}; 
+  //   if(this.minGridSize + 1 < this.MAX_GRID_SIZE){
+  //     this.minGridSize += 1; 
+  //     newPuzzleGrid = new individualMultipleTypes[this.minGridSize][]; 
+  //     for(int i = 0; i<this.minGridSize; i++){
+  //       if(i < this.minGridSize-1){
+  //         individualMultipleTypes[] currentRow = this.puzzleGrid[i]; 
+  //         individualMultipleTypes[] newRow = new individualMultipleTypes[this.minGridSize]; 
+  //         for(int j = 0; j <this.minGridSize; j++){
+  //           if(j == this.minGridSize-1){
+  //             newRow[j] = new individualMultipleTypes("X", null, null);
+  //           }else{
+  //             newRow[j] = currentRow[j]; 
+  //           }
+  //         }
+  //         newPuzzleGrid[i] = newRow; 
+  //       }else{
+  //         individualMultipleTypes[] newRow = new individualMultipleTypes[this.minGridSize]; 
+  //         Arrays.fill(newRow, new individualMultipleTypes("X", null, null));
+  //         newPuzzleGrid[i] = newRow; 
+  //       }
+  //     }
+  //   }
+  //   this.puzzleGrid = newPuzzleGrid; 
+  // }
 
   private boolean verticalGridCheck(int columnIndex, individualLetter[] word){
     int[] rowIndexes = indexesAsArray();
@@ -95,11 +123,11 @@ public class verticalIntegration {
           integratedWithGrid = true; 
         }else{
           firstRowIndex++; 
-          System.out.println("moved down one index"); 
+          // System.out.println("moved down one index"); 
         }
       } else{ // if row index array hasnt finished yet, change firstRow Index, else, move to another column 
-        System.out.println("OUT OF BOUNDS"); 
-        System.out.println("moved to another column"); 
+        // System.out.println("OUT OF BOUNDS"); 
+        // System.out.println("moved to another column"); 
         return false; 
       }
     }

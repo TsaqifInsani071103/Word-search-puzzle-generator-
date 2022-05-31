@@ -173,14 +173,14 @@ public class puzzleSearchGame {
     // if it is, and there is real letters, check if the real letters are in the appropriate index in the word, if not, move down 
     //repeat 
     Random randomObject = new Random(); 
+    verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
+    horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
     for(individualLetter[] word : wordBank){
-      integrationOptions(randomObject.nextInt(4), word); 
+      integrationOptions(randomObject.nextInt(4), word, integrateVertically, integrateHorizontally); 
     }
   } 
 
-  private void integrationOptions(int number, individualLetter[] word){
-    verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
-    horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
+  private void integrationOptions(int number, individualLetter[] word, verticalIntegration integrateVertically, horizontalIntegration integrateHorizontally){
     switch(number){
       case 0: 
         integrateVertically.integrate(word);
