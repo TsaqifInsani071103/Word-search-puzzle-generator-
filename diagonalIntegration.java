@@ -65,6 +65,7 @@ public class diagonalIntegration {
       rightPointer--;
     }
   } 
+  
   public boolean integrate(individualLetter[] word){
     int[] rowIndexes = indexesAsArray(); //the row index will be the dynamic one here 
     boolean integrateWithGrid = false; 

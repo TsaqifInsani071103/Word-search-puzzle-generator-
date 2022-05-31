@@ -114,7 +114,7 @@ public class horizontalIntegration {
   private boolean checkIfWithinBounds(int firstIndex, int length){
     int lastIndex = firstIndex + length - 1;
     try{
-      individualMultipleTypes[] check = puzzleGrid[lastIndex]; 
+      individualMultipleTypes check = puzzleGrid[0][lastIndex]; 
       return true; 
     } catch(Exception e){
       return false; 
