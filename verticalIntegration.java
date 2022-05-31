@@ -3,6 +3,8 @@ import java.util.Random;
 public class verticalIntegration {
   private int minGridSize; 
   private individualMultipleTypes[][] puzzleGrid; 
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_RESET = "\u001B[0m";
 
   public verticalIntegration(int minGridSize, individualMultipleTypes[][] puzzleGrid){
     this.minGridSize = minGridSize; 
@@ -14,7 +16,7 @@ public class verticalIntegration {
     for(int i = 0; i < this.minGridSize; i ++){
       for (int j = 0; j<this.minGridSize; j++){
         if(this.puzzleGrid[i][j].getRealValue() != null){
-          System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
+          System.out.print(ANSI_RED + this.puzzleGrid[i][j].getRealValue() + " " + ANSI_RESET);
         }else{
           System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
         }

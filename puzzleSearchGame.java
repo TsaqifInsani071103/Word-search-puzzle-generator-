@@ -79,9 +79,6 @@ public class puzzleSearchGame {
     //if lonest word is less than 10, size is 10 
     //if longest word is more than 10 and less than 30, grid size depends on number of words and if they fit 
     collectWords(); 
-    for(individualLetter[] i : this.wordBank){
-      System.out.println(Arrays.toString(i));
-    }
     System.out.println(this.minGridSize); 
     generateInitialGrid(); 
     puzzleToString();  
@@ -147,8 +144,7 @@ public class puzzleSearchGame {
     for(int i = 0; i<this.minGridSize; i++){
       individualMultipleTypes[] puzzleRow = new individualMultipleTypes[this.minGridSize]; 
       for(int j = 0; j<this.minGridSize; j++){
-        // puzzleRow[j] = this.ALPHABET[randomObject.nextInt(26)]; // uncomment this later 
-        puzzleRow[j] = new individualMultipleTypes("X", null);
+        puzzleRow[j] = new individualMultipleTypes(ALPHABET[randomObject.nextInt(26)], null);
       }
       this.puzzleGrid[i] = puzzleRow; 
     }
