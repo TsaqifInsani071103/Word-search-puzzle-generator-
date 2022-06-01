@@ -6,7 +6,7 @@ public class puzzleSearchGame {
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
   "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; 
   private int minGridSize = 10; //10 by 10 square 
-  private final int MAX_GRID_SIZE = 25; //30 by 30 square 
+  private final int MAX_GRID_SIZE = 13; //30 by 30 square 
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
   private int wordsFilled = 0; 
@@ -170,25 +170,35 @@ public class puzzleSearchGame {
   private void puzzleToString(){
     for(int i = 0; i < this.minGridSize; i ++){
       for (int j = 0; j<this.minGridSize; j++){
-        if(this.puzzleGrid[i][j].getRealValue() != null){
-          System.out.print(this.puzzleGrid[i][j].getRealValue().toStringReal() + " ");
-        }else{
-          System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
-        }
+        checkIfGridReal(i, j);
       }
       System.out.println(); 
     }
   } 
+
+  private void checkIfGridReal(int i, int j){
+    if(this.puzzleGrid[i][j].getRealValue() != null){
+      System.out.print(this.puzzleGrid[i][j].getRealValue().toStringReal() + " ");
+    }else{
+      System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
+    }
+  } 
+
+
   private void puzzleToStringSolution(){
     for(int i = 0; i < this.minGridSize; i ++){
       for (int j = 0; j<this.minGridSize; j++){
-        if(this.puzzleGrid[i][j].getRealValue() != null){
-          System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
-        }else{
-          System.out.print("X ");
-        }
+        checkIfGridRealSolution(i, j);
       }
       System.out.println(); 
+    }
+  } 
+
+  private void checkIfGridRealSolution(int i, int j){
+    if(this.puzzleGrid[i][j].getRealValue() != null){
+      System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
+    }else{
+      System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
     }
   } 
 
@@ -200,28 +210,44 @@ public class puzzleSearchGame {
     for(individualLetter[] word : wordBank){
       int incrementCheck = 1; 
       integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
-      while(!this.gridIsFilled && incrementCheck <= 6){
-        incrementCheck++; 
-        if(turn + 1 >= 6){
-          turn = 0;
-        }else{
-          turn++; 
-        }
-        integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
-      }
-      if(turn + 1 >= 6){
-        turn =0;
-      }else{
-        turn++; 
-      }
+      int[] result = doAnotherMoveWhileNotFilled(incrementCheck, turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
+      incrementCheck = result[0];
+      turn = result[1]; 
+      turn = incrementTurn(turn); 
       if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
         this.wordsFilled = 0; 
         break; 
       }else if (this.gridIsFilled){
         this.wordsFilled++; 
+        this.gridIsFilled = false; 
       }; 
     }
+    resetAndExpandGrid(); 
+  } 
 
+  private int[] doAnotherMoveWhileNotFilled(int incrementCheck, int turn, individualLetter[] word, verticalIntegration integrateVertically, 
+  horizontalIntegration integrateHorizontally, diagonalIntegration integrateDiagonally){
+    int[] result = new int[2]; 
+    while(!this.gridIsFilled && incrementCheck <= 6){
+      incrementCheck++; 
+      turn = incrementTurn(turn);
+      integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
+    }
+    result[0] = incrementCheck; 
+    result[1] = turn; 
+    return result; 
+  }
+
+  private int incrementTurn(int turn){
+    if(turn + 1 >= 6){
+      turn = 0;
+    }else{
+      turn++; 
+    }
+    return turn; 
+  } 
+
+  private void resetAndExpandGrid(){
     if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
       reInitializeGrid();
       fillInGrid();
@@ -231,7 +257,6 @@ public class puzzleSearchGame {
       System.out.println("If there were any that were left behind, then the grid has reached its maximum capacity" 
       + " with regards to the chosen words"); 
       System.out.println(); 
-      return; 
     }
   } 
 

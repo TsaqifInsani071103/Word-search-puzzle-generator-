@@ -9,18 +9,6 @@ public class diagonalIntegration {
     this.puzzleGrid = puzzleGrid; 
   } 
 
-  private void puzzleToString(){
-    for(int i = 0; i < this.minGridSize; i ++){
-      for (int j = 0; j<this.minGridSize; j++){
-        if(this.puzzleGrid[i][j].getRealValue() != null){
-          System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
-        }else{
-          System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
-        }
-      }
-      System.out.println(); 
-    }
-  } 
 
   private int[] indexesAsArray(){
     int[] indexes = new int[this.minGridSize];
