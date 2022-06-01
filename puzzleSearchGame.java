@@ -212,14 +212,11 @@ public class puzzleSearchGame {
     int turn = 0; 
     for(individualLetter[] word : wordBank){
       this.gridIsFilled = false; 
-      int incrementCheck = 1; 
+      int incrementCheck = 0; 
       integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
-      int[] result = doAnotherMoveWhileNotFilled(incrementCheck, turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
-      incrementCheck = result[0];
-      turn = result[1]; 
+      turn = doAnotherMoveWhileNotFilled(incrementCheck, turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
       turn = incrementTurn(turn); 
       if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
-        this.wordsFilled = 0; //
         reInitializeGrid();
         fillInGrid();
         break; 
@@ -229,17 +226,14 @@ public class puzzleSearchGame {
     }
   } 
 
-  private int[] doAnotherMoveWhileNotFilled(int incrementCheck, int turn, individualLetter[] word, verticalIntegration integrateVertically, 
+  private int doAnotherMoveWhileNotFilled(int incrementCheck, int turn, individualLetter[] word, verticalIntegration integrateVertically, 
   horizontalIntegration integrateHorizontally, diagonalIntegration integrateDiagonally){
-    int[] result = new int[2]; 
-    while(!this.gridIsFilled && incrementCheck <= 6){
+    while(!this.gridIsFilled && incrementCheck < 6){
       incrementCheck++; 
       turn = incrementTurn(turn);
       integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
     }
-    result[0] = incrementCheck; 
-    result[1] = turn; 
-    return result; 
+    return turn; 
   }
 
   private int incrementTurn(int turn){

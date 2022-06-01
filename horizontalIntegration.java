@@ -80,9 +80,7 @@ public class horizontalIntegration {
     while(!integratedWithGrid){
       if(checkIfWithinBounds(columnIndexes[firstColumnIndex], lengthOfWord)){
         if(checkIfOnlyFakeLetters(columnIndexes[firstColumnIndex], rowIndex, word)){   
-          // System.out.println("INTEGRATED!");
           integrateWord(columnIndexes[firstColumnIndex], rowIndex, word); 
-          // puzzleToString(); //uncomment this later 
           integratedWithGrid = true; 
         }else{
           if(firstColumnIndex + 1 < columnIndexes.length){

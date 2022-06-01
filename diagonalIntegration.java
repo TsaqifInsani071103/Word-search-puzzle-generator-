@@ -119,6 +119,7 @@ public class diagonalIntegration {
     return true; 
   }
 
+
   private boolean ifForwardColumnWithinBounds(int firstIndex, int length){
     if((this.minGridSize - firstIndex) >= length){
       return true; 
