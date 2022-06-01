@@ -5,6 +5,3 @@ public class tsaqifWordSearch{
   }
 }
 
-//make sure to randomize the diagonal integration, left to right takes precedence right now, we dont want that. 
-//main loop for main instructions in puzzleSearchGame.java 
-//clean up your code. 

@@ -90,11 +90,8 @@ public class horizontalIntegration {
           }else{
             return false; 
           }
-          // System.out.println("moved down one index"); 
         }
-      } else{ // mvoe to another row  
-        // System.out.println("OUT OF BOUNDS"); 
-        // System.out.println("moved to another row"); 
+      } else{ 
         return false; 
       }
     }

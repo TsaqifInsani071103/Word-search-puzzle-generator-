@@ -1,7 +1,6 @@
 import java.util.Scanner; 
 import java.util.ArrayList; 
 import java.util.Random; 
-import java.util.Arrays; 
 public class puzzleSearchGame {
   private ArrayList<individualLetter[]> wordBank = new ArrayList<individualLetter[]>(); 
   private final String[] ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
@@ -11,10 +10,14 @@ public class puzzleSearchGame {
   private individualMultipleTypes[][] puzzleGrid = {}; 
   private boolean gridIsFilled = true; 
   private int wordsFilled = 0; 
+  private boolean continueLoop = true; 
 
   public void runProgram(){
-    printInstructions(); 
-    processUserMenuInput(); 
+    while(this.continueLoop){
+
+      printInstructions(); 
+      processUserMenuInput(); 
+    }
   } 
   
   private void printInstructions(){
@@ -68,26 +71,37 @@ public class puzzleSearchGame {
       case "g":
         generateWordSearch(); 
         break; 
+      case "q":
+        this.continueLoop = false; 
+        break; 
+      case "p":
+        printPuzzle(false); 
+        break; 
+      case "s":
+        printPuzzle(true); 
+        break; 
       default: 
         System.out.println("isyou"); 
     }
   } 
 
-  private void generateWordSearch(){
-    //ask user repeatedly, the words they want to include. 
-    //set up a counter, to get which word is the longest, 
-    //set up the grid at the longest word's size 
-    //if words don't fit the grid no more, and grid size is still less than max grid size, increase grid size. 
+  private void printPuzzle(Boolean solution){
+    if(puzzleGrid.length > 0){
+      if(solution){
+        puzzleToStringSolution();
+      }else{
+        puzzleToString();
+      }
+    }else{
+      System.out.println("Please generate a puzzle search first before you can print"); 
+    }
+  } 
 
-    //if lonest word is less than 10, size is 10 
-    //if longest word is more than 10 and less than 30, grid size depends on number of words and if they fit 
+  private void generateWordSearch(){
+    this.wordBank = new ArrayList<individualLetter[]>(); 
     collectWords(); 
-    System.out.println(this.minGridSize); 
     generateInitialGrid();  
     fillInGrid(); 
-
-    
-    
   } 
 
   private void collectWords(){
@@ -157,9 +171,21 @@ public class puzzleSearchGame {
     for(int i = 0; i < this.minGridSize; i ++){
       for (int j = 0; j<this.minGridSize; j++){
         if(this.puzzleGrid[i][j].getRealValue() != null){
-          System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
+          System.out.print(this.puzzleGrid[i][j].getRealValue().toStringReal() + " ");
         }else{
           System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
+        }
+      }
+      System.out.println(); 
+    }
+  } 
+  private void puzzleToStringSolution(){
+    for(int i = 0; i < this.minGridSize; i ++){
+      for (int j = 0; j<this.minGridSize; j++){
+        if(this.puzzleGrid[i][j].getRealValue() != null){
+          System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
+        }else{
+          System.out.print("X ");
         }
       }
       System.out.println(); 
@@ -201,8 +227,10 @@ public class puzzleSearchGame {
       fillInGrid();
       this.wordsFilled = 0; 
     }else{
-      System.out.println(wordsFilled); 
-      puzzleToString();
+      System.out.println(wordsFilled + " words have been filled in the grid"); 
+      System.out.println("If there were any that were left behind, then the grid has reached its maximum capacity" 
+      + " with regards to the chosen words"); 
+      System.out.println(); 
       return; 
     }
   } 
