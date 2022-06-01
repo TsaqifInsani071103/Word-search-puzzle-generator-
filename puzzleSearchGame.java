@@ -198,7 +198,7 @@ public class puzzleSearchGame {
     if(this.puzzleGrid[i][j].getRealValue() != null){
       System.out.print(this.puzzleGrid[i][j].getRealValue() + " ");
     }else{
-      System.out.print(this.puzzleGrid[i][j].getFakeValue() + " ");
+      System.out.print("X ");
     }
   } 
 
@@ -208,6 +208,7 @@ public class puzzleSearchGame {
     diagonalIntegration integrateDiagonally = new diagonalIntegration(this.minGridSize, this.puzzleGrid); 
     int turn = 0; 
     for(individualLetter[] word : wordBank){
+      this.gridIsFilled = false; 
       int incrementCheck = 1; 
       integrationOptions(turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
       int[] result = doAnotherMoveWhileNotFilled(incrementCheck, turn, word, integrateVertically, integrateHorizontally, integrateDiagonally); 
@@ -215,14 +216,15 @@ public class puzzleSearchGame {
       turn = result[1]; 
       turn = incrementTurn(turn); 
       if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
-        this.wordsFilled = 0; 
+        this.wordsFilled = 0; //
+        reInitializeGrid();
+        fillInGrid();
         break; 
       }else if (this.gridIsFilled){
         this.wordsFilled++; 
-        this.gridIsFilled = false; 
       }; 
     }
-    resetAndExpandGrid(); 
+    System.out.println(this.wordsFilled + " amount of words have been filled in the grid"); 
   } 
 
   private int[] doAnotherMoveWhileNotFilled(int incrementCheck, int turn, individualLetter[] word, verticalIntegration integrateVertically, 
