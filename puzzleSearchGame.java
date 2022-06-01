@@ -102,6 +102,9 @@ public class puzzleSearchGame {
     collectWords(); 
     generateInitialGrid();  
     fillInGrid(); 
+    System.out.println(this.wordsFilled + " amount of words have been filled in the grid"); 
+    System.out.println("words left behind is a result of maximum grid capacity" 
+    + "with regards to the maximum column numbers and chosen words"); 
   } 
 
   private void collectWords(){
@@ -203,6 +206,7 @@ public class puzzleSearchGame {
   } 
 
   private void fillInGrid(){
+    this.wordsFilled = 0; 
     verticalIntegration integrateVertically = new verticalIntegration(this.minGridSize, this.puzzleGrid); 
     horizontalIntegration integrateHorizontally = new horizontalIntegration(this.minGridSize, this.puzzleGrid); 
     diagonalIntegration integrateDiagonally = new diagonalIntegration(this.minGridSize, this.puzzleGrid); 
@@ -224,7 +228,6 @@ public class puzzleSearchGame {
         this.wordsFilled++; 
       }; 
     }
-    System.out.println(this.wordsFilled + " amount of words have been filled in the grid"); 
   } 
 
   private int[] doAnotherMoveWhileNotFilled(int incrementCheck, int turn, individualLetter[] word, verticalIntegration integrateVertically, 
@@ -247,19 +250,6 @@ public class puzzleSearchGame {
       turn++; 
     }
     return turn; 
-  } 
-
-  private void resetAndExpandGrid(){
-    if(!this.gridIsFilled && this.minGridSize < this.MAX_GRID_SIZE){
-      reInitializeGrid();
-      fillInGrid();
-      this.wordsFilled = 0; 
-    }else{
-      System.out.println(wordsFilled + " words have been filled in the grid"); 
-      System.out.println("If there were any that were left behind, then the grid has reached its maximum capacity" 
-      + " with regards to the chosen words"); 
-      System.out.println(); 
-    }
   } 
 
   private void reInitializeGrid(){
