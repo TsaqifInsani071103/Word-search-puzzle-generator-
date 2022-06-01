@@ -9,7 +9,6 @@ public class diagonalIntegration {
     this.puzzleGrid = puzzleGrid; 
   } 
 
-  //DELETE THIS LATER WHEN YOU'RE DONE CHECKING EVERYTHING 
   private void puzzleToString(){
     for(int i = 0; i < this.minGridSize; i ++){
       for (int j = 0; j<this.minGridSize; j++){

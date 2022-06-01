@@ -81,7 +81,7 @@ public class puzzleSearchGame {
         printPuzzle(true); 
         break; 
       default: 
-        System.out.println("isyou"); 
+        break; 
     }
   } 
 
